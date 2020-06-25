@@ -17,21 +17,8 @@ Use App\Article;
 //    return $request->user();
 //});
 
-Route::get('articles', function(){
-    returnArticle::all();
-});
-Route::get('articles/{id}', function($id){
-    returnArticle::find($id);
-});
-Route::post('articles', function(Request $request){
-    returnArticle::create($request->all());
-});
-Route::put('articles/{id}', function(Request $request, $id){
-    $article = Article::findOrFail($id);
-    $article->update($request->all());
-    return$article;
-});
-Route::delete('articles/{id}', function($id){
-    Article::find($id)->delete();
-    return204;
-});
+Route::get('articles', 'ArticleController@index');
+Route::get('articles/{article}', 'ArticleController@show');
+Route::post('articles', 'ArticleController@store');
+Route::put('articles/{article}', 'ArticleController@update');
+Route::delete('articles/{article}', 'ArticleController@delete');
