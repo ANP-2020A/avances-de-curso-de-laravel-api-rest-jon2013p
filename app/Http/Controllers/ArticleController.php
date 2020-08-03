@@ -18,12 +18,14 @@ class ArticleController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Article::class);
         return new ArticleCollection(Article::paginate(25));
     }
 
     public function show(Article $article)
     {
-        return response ()-> json(new ArticleResource($article),200);
+        $this->authorize('view', $article);
+        return response()->json(new ArticleResource($article), 200);
     }
 
     public function image(Article $article) {
